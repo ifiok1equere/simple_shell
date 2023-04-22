@@ -18,4 +18,5 @@ char *_realloc(char *ptr, size_t old_size, size_t new_size);
 char *_memcpy(char *dest, char *src, size_t n);
 ssize_t fetchline(char **lineptr, size_t *n, FILE *stream);
 ssize_t fetchline1(char **p, char *q, char *r, char *ending_buf, size_t *n);
+char *_strtok(char *str, const char *delim);
 #endif
