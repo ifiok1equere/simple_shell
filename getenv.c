@@ -8,7 +8,7 @@ char *_getenv(const char *name)
 {
 	char **envp = new_env();
 	int i = 0;
-	char *token, *cpy, *token1, *value;
+	char *token, *cpy, *token1, *value = NULL;
 
 	if (envp == NULL)
 		return (NULL);
