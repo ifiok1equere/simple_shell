@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * frees - frees memory
+ * frees1 - frees memory
  * @argv: to be freed
  */
 void frees1(char **argv)

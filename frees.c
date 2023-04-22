@@ -2,6 +2,7 @@
 /**
  * frees - frees memory
  * @argv: to be freed
+ * @envp: to be freed
  */
 void frees(char **argv, char **envp)
 {

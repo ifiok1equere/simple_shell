@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * _get_env - get value
+ * _getenv - get value
  * @name: environment variable
  * Return: value
  */
