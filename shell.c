@@ -5,8 +5,8 @@
  */
 int main(void)
 {
-	char *command = NULL;
-	char **argv = NULL;
+	char *command = NULL, **argv = NULL;
+	int i;
 
 	while (1)
 	{
@@ -22,9 +22,11 @@ int main(void)
 	}
 	if (_strcmp(argv[0], "exit") == 0)
 	{
+		if (argv[1] != NULL)
+			i = atoi(argv[1]);
 		free(command);
 		frees1(argv);
-		break;
+		return (i);
 	}
 	execute(argv);
 	if (command && command[0] != '\n')

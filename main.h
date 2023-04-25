@@ -11,6 +11,9 @@
 
 extern char **environ;
 
+# define ERROR1 "check number of arguments passed\n"
+# define VAR "variable does not exist\n"
+
 int _strlen(char *s);
 void _puts(char *str);
 char *_strcpy(char *dest, char *src);
@@ -28,9 +31,15 @@ void frees(char **argv, char **envp);
 char *_getenv(const char *name);
 char **new_env(void);
 char *path_finder(char **argv);
-void execute(char **argv);
+void execute(char **argv, char **en);
 void frees1(char **argv);
 void errors(char *argv);
 int set_env(char **argv, char **e);
 int unset_env(char **argv, char **e);
+int builtin(char **argv, char **en);
+int is_space(char *str);
+void cd(char **argv, char **en);
+int set_var(char *argv, char *value, char **e);
+int set_pwd(char **e, char *current);
+
 #endif
