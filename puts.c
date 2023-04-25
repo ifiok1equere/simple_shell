@@ -1,8 +1,8 @@
 #include "main.h"
- /**
-  * _puts - string displayed
-  * @str: string
-  */
+/**
+ * _puts - string displayed
+ * @str: string
+ */
 void _puts(char *str)
 {
 	while (*str != '\0')
