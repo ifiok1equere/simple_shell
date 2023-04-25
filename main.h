@@ -1,7 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-<<<<<<< HEAD
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
@@ -22,9 +21,9 @@ char *_strcpy(char *dest, char *src);
 int _putchar(char c);
 char *_strcat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
-char *_memcpy(char *dest, char *src, unsigned int n);
+char *_memcpy(char *dest, char *src, size_t n);
 char *_strchr(char *s, char c);
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+char *_realloc(char *ptr, size_t old_size, size_t new_size);
 void prompt(void);
 char *read_input(void);
 char *_strdup(char *source);

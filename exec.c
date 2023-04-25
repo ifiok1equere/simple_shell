@@ -37,20 +37,23 @@ char *path_finder(char **argv)
 		token = strtok(NULL, ":");
 	}
 	free(path);
-	frees(argv, en);
 	return (NULL);
 }
 /**
  * execute - executes command
- * @en: environment
  * @argv: array of strings
  */
-void execute(char **argv, char **en)
+void execute(char **argv)
 {
 	pid_t pid;
 	int x, status;
-	char *path;
+	char *path, **en = new_env();
 
+	if (en == NULL)
+	{
+		frees1(argv);
+		return;
+	}
 	path = path_finder(argv);
 	if (path == NULL)
 	{
@@ -75,6 +78,8 @@ void execute(char **argv, char **en)
 	}
 	else if (pid > 0)
 		wait(&status);
-	free(path);
+	if (path != NULL)
+		free(path);
 	}
+	frees(argv, en);
 }
