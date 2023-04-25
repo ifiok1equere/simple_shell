@@ -1,6 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+<<<<<<< HEAD
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,6 +14,7 @@ extern char **environ;
 
 # define ERROR1 "check number of arguments passed\n"
 # define VAR "variable does not exist\n"
+#define CL_CHAR_NUM 10
 
 int _strlen(char *s);
 void _puts(char *str);
@@ -41,5 +43,8 @@ int is_space(char *str);
 void cd(char **argv, char **en);
 int set_var(char *argv, char *value, char **e);
 int set_pwd(char **e, char *current);
+ssize_t fetchline(char **lineptr, size_t *n, FILE *stream);
+ssize_t fetchline1(char **p, char *q, char *r, char *ending_buf, size_t *n);
+char *_strtok(char *str, const char *delim);
 
 #endif
