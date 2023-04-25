@@ -3,6 +3,5 @@ a.out
 getline2.c
 main.c
 AUTHORS
-main.h
 README.md
 generate-authors.sh

@@ -33,7 +33,7 @@ void frees(char **argv, char **envp);
 char *_getenv(const char *name);
 char **new_env(void);
 char *path_finder(char **argv);
-void execute(char **argv, char **en);
+void execute(char **argv);
 void frees1(char **argv);
 void errors(char *argv);
 int set_env(char **argv, char **e);
