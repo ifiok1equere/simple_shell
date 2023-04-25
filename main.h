@@ -30,5 +30,7 @@ char **new_env(void);
 char *path_finder(char **argv);
 void execute(char **argv);
 void frees1(char **argv);
-
+void errors(char *argv);
+int set_env(char **argv, char **e);
+int unset_env(char **argv, char **e);
 #endif
