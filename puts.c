@@ -2,6 +2,7 @@
 /**
  * _puts - string displayed
  * @str: string
+ * Return: void
  */
 void _puts(char *str)
 {
