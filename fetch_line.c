@@ -51,7 +51,7 @@ ssize_t fetchline1(char **p, char *q, char *r, char *ending_buf, size_t *n)
 ssize_t fetchline(char **lineptr, size_t *n, FILE *stream)
 {
 	ssize_t read_count_total;
-	char *buf, *new_buf, *moving_buf, *ending_buf;
+	char *buf, *moving_buf, *ending_buf;
 
 	if (!lineptr || !n || !stream)
 		return (-1);

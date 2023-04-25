@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include <errno.h>
 
 int _strlen(char *s);
 char *_strchr(char *s, char c);
@@ -19,4 +20,5 @@ char *_memcpy(char *dest, char *src, size_t n);
 ssize_t fetchline(char **lineptr, size_t *n, FILE *stream);
 ssize_t fetchline1(char **p, char *q, char *r, char *ending_buf, size_t *n);
 char *_strtok(char *str, const char *delim);
+int cd_dir(char *delim);
 #endif
