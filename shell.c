@@ -25,7 +25,7 @@ int main(void)
 	{
 		free(command);
 		frees1(argv);
-		return (-1);
+		break;
 	}
 	builtin(argv, environ);
 	if (command && command[0] != '\n')
@@ -60,7 +60,7 @@ int interact(char *input)
 		if (_strcmp(tokens[0], "exit") == 0)
 		{
 			frees1(tokens);
-			return (-1);;
+			break;
 		}
 		builtin(tokens, environ);
 	}
