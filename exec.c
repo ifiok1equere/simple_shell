@@ -6,9 +6,8 @@
  */
 char *path_finder(char **argv)
 {
-	/*int len;*/
-	/*char *path = NULL, *token = NULL,*/
-	char *filename = NULL;
+	int len;
+	char *path = NULL, *token = NULL, *filename = NULL;
 	struct stat status;
 
 	if (stat(argv[0], &status) == 0)
@@ -16,30 +15,28 @@ char *path_finder(char **argv)
 		filename = _strdup(argv[0]);
 		return (filename);
 	}
-	/**
-	   *path = _getenv("PATH");
-	*if (path == NULL)
-	*	return (NULL);
-	*token = strtok(path, ":");
-	*while (token != NULL)
-	*{
-	*	len = _strlen(argv[0]) + _strlen(token) + 2;
-	*	filename = malloc(sizeof(char) * len);
-	*	if (filename == NULL)
-	*		return (NULL);
-	*	_strcpy(filename, token);
-	*	_strcat(filename, "/");
-	*	_strcat(filename, argv[0]);
-	*	if (stat(filename, &status) == 0)
-	*	{
-	*		free(path);
-	*		return (filename);
-	*	}
-	*	free(filename);
-	*	token = strtok(NULL, ":");
-*	}
-	*free(path);
-	 */
+	path = _getenv("PATH");
+	if (path == NULL)
+		return (NULL);
+	token = strtok(path, ":");
+	while (token != NULL)
+	{
+		len = _strlen(argv[0]) + _strlen(token) + 2;
+		filename = malloc(sizeof(char) * len);
+		if (filename == NULL)
+			return (NULL);
+		_strcpy(filename, token);
+		_strcat(filename, "/");
+		_strcat(filename, argv[0]);
+		if (stat(filename, &status) == 0)
+		{
+			free(path);
+			return (filename);
+		}
+		free(filename);
+		token = strtok(NULL, ":");
+	}
+	free(path);
 	return (NULL);
 }
 /**
@@ -54,7 +51,10 @@ void execute(char **argv)
 
 	path = path_finder(argv);
 	if (path == NULL)
+	{
 		perror("./hsh");
+		frees1(argv);
+	}
 	else
 	{
 		pid = fork();

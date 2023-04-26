@@ -7,8 +7,9 @@ int main(void)
 {
 	char *input;
 	char **tokens;
-	int i;
 
+	if (isatty(STDIN_FILENO))
+	{
 	while (1)
 	{
 		prompt();
@@ -21,21 +22,37 @@ int main(void)
 			free(input);
 			exit(EXIT_FAILURE);
 		}
-		i = 0;
-		while (tokens[i] != NULL)
-			i++;
-		if (i != 1)
-		{
-			perror("./hsh");
+		execute(tokens);
+		if (input == NULL && input[0] != '\n')
 			free(input);
-			frees1(tokens);
-		}
-		else
-		{
-			execute(tokens);
-			if (input == NULL && input[0] != '\n')
-				free(input);
-		}
+	}
+	}
+	else
+	{
+		input = NULL;
+		interact(input);
 	}
 	return (0);
+}
+
+/**
+ * interact - non interactive mode
+ * @input: from user
+ */
+void interact(char *input)
+{
+	char **tokens;
+	size_t n = 0;
+
+	while (getline(&input, &n, stdin) != -1)
+	{
+		tokens = tokenize(input, " \n");
+		if (tokens == NULL)
+		{
+			free(input);
+			exit(EXIT_FAILURE);
+		}
+		execute(tokens);
+	}
+		free(input);
 }
