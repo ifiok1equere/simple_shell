@@ -6,7 +6,6 @@
 int main(void)
 {
 	char *command = NULL, **argv = NULL;
-	int i = -1;
 
 	if (isatty(STDIN_FILENO))
 	{
@@ -22,13 +21,7 @@ int main(void)
 		free(command);
 		return (-1);
 	}
-	if (_strcmp(argv[0], "exit") == 0)
-	{
-		free(command);
-		frees1(argv);
-		return (i);
-	}
-	execute(argv);
+	builtin(argv, environ);
 	if (command && command[0] != '\n')
 		free(command);
 	}
