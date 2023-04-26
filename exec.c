@@ -54,7 +54,7 @@ void execute(char **argv, char **en)
 	path = path_finder(argv, en);
 	if (path == NULL)
 	{
-		errors(argv[0]);
+		perror("./hsh");
 	}
 	else
 	{
