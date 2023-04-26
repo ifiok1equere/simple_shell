@@ -65,7 +65,7 @@ void execute(char **argv, char **en)
 	}
 	else if (pid == 0)
 	{
-		x = execve(path, argv, en);
+		x = execve(path, argv, environ);
 		if (x == -1)
 		{
 			frees1(argv);
