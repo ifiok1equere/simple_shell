@@ -6,6 +6,7 @@
 int main(void)
 {
 	char *command = NULL, **argv = NULL;
+	int i = -1;
 
 	if (isatty(STDIN_FILENO))
 	{
@@ -20,6 +21,14 @@ int main(void)
 	{
 		free(command);
 		return (-1);
+	}
+	if (_strcmp(argv[0], "exit") == 0)
+	{
+		if (argv[1] != NULL)
+			i = atoi(argv[1]);
+		free(command);
+		frees1(argv);
+		return (i);
 	}
 	builtin(argv, environ);
 	if (command && command[0] != '\n')
@@ -36,11 +45,13 @@ int main(void)
 /**
  * interact - non interactive mode
  * @input: from user
+ * Return: 0 success
  */
-void interact(char *input)
+int interact(char *input)
 {
 	char **tokens;
 	size_t n = 0;
+	int i;
 
 	while (getline(&input, &n, stdin) != -1)
 	{
@@ -50,7 +61,15 @@ void interact(char *input)
 			free(input);
 			exit(EXIT_FAILURE);
 		}
+		if (_strcmp(tokens[0], "exit") == 0)
+		{
+			if (tokens[1] != NULL)
+				i = atoi(tokens[1]);
+			frees1(tokens);
+			return (i);
+		}
 		builtin(tokens, environ);
 	}
 		free(input);
+		return (0);
 }
