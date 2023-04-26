@@ -47,33 +47,39 @@ void execute(char **argv)
 {
 	pid_t pid;
 	int x, status;
-	char *path;
+	char *path, **en = new_env();
 
+	if (en == NULL)
+	{
+		frees1(argv);
+		return;
+	}
 	path = path_finder(argv);
 	if (path == NULL)
 	{
-		perror("./hsh");
-		frees1(argv);
+		errors(argv[0]);
 	}
 	else
 	{
-		pid = fork();
-		if (pid == -1)
-			perror("fork");
-		else if (pid == 0)
-		{
-			x = execve(path, argv, environ);
-			if (x == -1)
-			{
-				frees1(argv);
-				exit(EXIT_FAILURE);
-			}
-			exit(EXIT_SUCCESS);
-		}
-		else if (pid > 0)
-			wait(&status);
-		if (path != NULL)
-			free(path);
-		frees1(argv);
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("fork");
 	}
+	else if (pid == 0)
+	{
+		x = execve(path, argv, en);
+		if (x == -1)
+		{
+			frees(argv, en);
+			exit(EXIT_FAILURE);
+		}
+		exit(EXIT_SUCCESS);
+	}
+	else if (pid > 0)
+		wait(&status);
+	if (path != NULL)
+		free(path);
+	}
+	frees(argv, en);
 }
