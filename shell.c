@@ -50,7 +50,7 @@ void interact(char *input)
 			free(input);
 			exit(EXIT_FAILURE);
 		}
-		execute(tokens);
+		builtin(tokens, environ);
 	}
 		free(input);
 }
