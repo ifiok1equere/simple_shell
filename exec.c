@@ -2,9 +2,10 @@
 /**
   * path_finder - executes new process
   * @argv: array of strings
+  * @en: environment
   * Return: path
  */
-char *path_finder(char **argv)
+char *path_finder(char **argv, char **en)
 {
 	int len;
 	char *path = NULL, *token = NULL, *filename = NULL;
@@ -15,7 +16,7 @@ char *path_finder(char **argv)
 		filename = _strdup(argv[0]);
 		return (filename);
 	}
-	path = _getenv("PATH");
+	path = _getenv("PATH", en);
 	if (path == NULL)
 		return (NULL);
 	token = strtok(path, ":");
@@ -42,19 +43,15 @@ char *path_finder(char **argv)
 /**
  * execute - executes command
  * @argv: array of strings
+ * @en: environment
  */
-void execute(char **argv)
+void execute(char **argv, char **en)
 {
 	pid_t pid;
 	int x, status;
-	char *path, **en = new_env();
+	char *path;
 
-	if (en == NULL)
-	{
-		frees1(argv);
-		return;
-	}
-	path = path_finder(argv);
+	path = path_finder(argv, en);
 	if (path == NULL)
 	{
 		errors(argv[0]);
@@ -71,7 +68,7 @@ void execute(char **argv)
 		x = execve(path, argv, en);
 		if (x == -1)
 		{
-			frees(argv, en);
+			frees1(argv);
 			exit(EXIT_FAILURE);
 		}
 		exit(EXIT_SUCCESS);
@@ -81,5 +78,5 @@ void execute(char **argv)
 	if (path != NULL)
 		free(path);
 	}
-	frees(argv, en);
+	frees1(argv);
 }

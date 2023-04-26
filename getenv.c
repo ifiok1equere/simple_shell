@@ -2,11 +2,11 @@
 /**
  * _getenv - get value
  * @name: environment variable
+ * @envp: environment
  * Return: value
  */
-char *_getenv(const char *name)
+char *_getenv(const char *name, char **envp)
 {
-	char **envp = new_env();
 	int i = 0;
 	char *token, *cpy, *token1, *value = NULL;
 
@@ -20,7 +20,6 @@ char *_getenv(const char *name)
 		{
 			token1 = strtok(NULL, "=");
 			value = _strdup(token1);
-			frees1(envp);
 			free(cpy);
 			return (value);
 		}
@@ -28,7 +27,6 @@ char *_getenv(const char *name)
 		free(cpy);
 	}
 	free(value);
-	frees1(envp);
 	return (NULL);
 }
 /**

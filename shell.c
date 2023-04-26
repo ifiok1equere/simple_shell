@@ -28,7 +28,7 @@ int main(void)
 		frees1(argv);
 		return (i);
 	}
-	execute(argv);
+	execute(argv, environ);
 	if (command && command[0] != '\n')
 		free(command);
 	}
