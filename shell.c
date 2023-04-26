@@ -6,7 +6,6 @@
 int main(void)
 {
 	char *command = NULL, **argv = NULL;
-	int i = -1;
 
 	if (isatty(STDIN_FILENO))
 	{
@@ -24,11 +23,9 @@ int main(void)
 	}
 	if (_strcmp(argv[0], "exit") == 0)
 	{
-		if (argv[1] != NULL)
-			i = atoi(argv[1]);
 		free(command);
 		frees1(argv);
-		return (i);
+		break;
 	}
 	builtin(argv, environ);
 	if (command && command[0] != '\n')
@@ -51,7 +48,6 @@ int interact(char *input)
 {
 	char **tokens;
 	size_t n = 0;
-	int i;
 
 	while (getline(&input, &n, stdin) != -1)
 	{
@@ -63,10 +59,8 @@ int interact(char *input)
 		}
 		if (_strcmp(tokens[0], "exit") == 0)
 		{
-			if (tokens[1] != NULL)
-				i = atoi(tokens[1]);
 			frees1(tokens);
-			return (i);
+			break;
 		}
 		builtin(tokens, environ);
 	}
