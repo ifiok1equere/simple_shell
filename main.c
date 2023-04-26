@@ -1,36 +1,41 @@
 #include "main.h"
 /**
- * main - checks if shell works
- * Return: 0 success
+ * main - Entry point to the shell
+ * Return: 0 for success always
  */
 int main(void)
 {
-	char *command = NULL, **argv = NULL;
+	char *input;
+	char **tokens;
 	int i;
 
 	while (1)
 	{
-	prompt();
-	command = read_input();
-	if (command == NULL)
-		return (-1);
-	argv = tokenize(command, " \n");
-	if (argv == NULL)
-	{
-		free(command);
-		return (-1);
-	}
-	if (_strcmp(argv[0], "exit") == 0)
-	{
-		if (argv[1] != NULL)
-			i = atoi(argv[1]);
-		free(command);
-		frees1(argv);
-		return (i);
-	}
-	execute(argv, environ);
-	if (command && command[0] != '\n')
-		free(command);
+		prompt();
+		input = read_input();
+		if (input == NULL)
+			exit(EXIT_FAILURE);
+		tokens = tokenize(input, " \n");
+		if (tokens == NULL)
+		{
+			free(input);
+			exit(EXIT_FAILURE);
+		}
+		i = 0;
+		while (tokens[i] != NULL)
+			i++;
+		if (i != 1)
+		{
+			perror("./hsh");
+			free(input);
+			frees1(tokens);
+		}
+		else
+		{
+			execute(tokens);
+			if (input == NULL && input[0] != '\n')
+				free(input);
+		}
 	}
 	return (0);
 }
